@@ -1,27 +1,15 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {NavigationContainer} from '@react-navigation/native';
-import Items from "./src/items";
-import AddItems from "./src/additems";
+import React from 'react'
+import { Provider as PaperProvider } from 'react-native-paper'
+import AppNavigator from './src/navigation'
+import { Provider as StoreProvider } from 'react-redux'
+import store from './src/redux/store'
 
-
-const Tab = createBottomTabNavigator();
-
-const App =() => {
+export default function App() {
   return (
-    <NavigationContainer>
-    <Tab.Navigator
-    tabBarOptions={{
-      labelStyle: {fontSize:15},
-      activeTintColor:'blue',
-      inactiveTintColor:'grey',
-    }}>
-      <Tab.Screen name="View" component={Items} headerShown={false}/>
-      <Tab.Screen name="Add New" component={AddItems}/>
-    </Tab.Navigator>
-    </NavigationContainer>
+    <StoreProvider store={store}>
+      <PaperProvider>
+        <AppNavigator />
+      </PaperProvider>
+    </StoreProvider>
   )
 }
-
-export default App;
-
